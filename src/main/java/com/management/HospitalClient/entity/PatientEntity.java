@@ -29,4 +29,17 @@ public class PatientEntity  implements Serializable{
     private String name;
     @Column(name="phone-number")
     private String phoneNumber;
+    @Column(name="gender")
+    private String gender;
+    @Column(name="address")
+    private String address;
+    @Column(name="blood_group")
+    private String bloodGroup;
+    @Column(name="date_of_birth")
+    private String dateOfBirth;
+    @Column(name="emergency_contact")
+    private String emergencyContact;
+    @Column(name="medical_history_notes")
+    private String medicalHistoryNotes;
+
 }
