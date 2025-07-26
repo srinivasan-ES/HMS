@@ -20,9 +20,9 @@ public class AppointmentController {
     @Autowired
     AppointmentService appointmentService;
 
-    @PostMapping("/book-appointment")
-    public AppointmentEntity saveOrUpdate(@RequestBody AppointmentEntity appointmentEntity) {
-        return appointmentService.createAppointment(appointmentEntity);
+    @PostMapping("/book-appointment/{patientId}")
+    public AppointmentEntity saveOrUpdate(@PathVariable long patientId,@RequestBody AppointmentEntity appointmentEntity) {
+        return appointmentService.createAppointment(patientId,appointmentEntity);
     }
 
     @GetMapping("/get-appointment/{id}")

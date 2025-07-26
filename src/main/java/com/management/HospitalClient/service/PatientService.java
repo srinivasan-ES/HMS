@@ -2,21 +2,28 @@ package com.management.HospitalClient.service;
 
 import com.management.HospitalClient.entity.PatientEntity;
 import com.management.HospitalClient.repository.PatientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.management.HospitalClient.utility.MailSubjectAndContent.patientRegistration;
+import static com.management.HospitalClient.utility.MailSubjectAndContent.patientRegistrationSubject;
+
 @Service
 public class PatientService {
 
-    private final PatientRepository patientRepository;
+    @Autowired
+    PatientRepository patientRepository;
 
-    public PatientService(PatientRepository patientRepository) {
-        this.patientRepository = patientRepository;
-    }
+    @Autowired
+    EmailService emailService;
+
     public PatientEntity createPatient(PatientEntity patientEntity){
 
-        return patientRepository.save(patientEntity);
+        PatientEntity patientEntity1=patientRepository.save(patientEntity);
+        emailService.sendEmail(patientEntity1.getEmailAddress(), patientRegistrationSubject, patientRegistration);
+        return patientEntity1;
     }
 
     public PatientEntity getPatient(long id){

@@ -22,10 +22,9 @@ public class BillingController {
     @Autowired
     BillingService billingService;
 
-    @PostMapping("/generate-bill")
-    public BillingEntity saveOrUpdate(@RequestBody BillingEntity billingEntity) {
-
-        return billingService.createBilling(billingEntity);
+    @PostMapping("/generate-bill/{patientId}")
+    public BillingEntity generateBill(@PathVariable Long patientId,@RequestBody BillingEntity billingEntity) {
+        return billingService.createBilling(patientId,billingEntity);
     }
 
     @GetMapping("/get-billing/{id}")

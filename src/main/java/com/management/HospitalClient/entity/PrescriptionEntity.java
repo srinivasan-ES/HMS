@@ -33,4 +33,44 @@ public class PrescriptionEntity implements Serializable{
     private String diagnosis;
     @Column(name="remarks")
     private String remarks;
+
+    public long getPrescriptionId() {
+        return prescriptionId;
+    }
+
+    public void setPrescriptionId(long prescriptionId) {
+        this.prescriptionId = prescriptionId;
+    }
+
+    public Long getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(Long appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
+    public String getPrescribedDate() {
+        return prescribedDate;
+    }
+
+    public void setPrescribedDate(String prescribedDate) {
+        this.prescribedDate = prescribedDate;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 }
