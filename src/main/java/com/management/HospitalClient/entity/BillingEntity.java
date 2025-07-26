@@ -38,7 +38,7 @@ public class BillingEntity implements Serializable {
     @Column(name = "payment_status")
     private String paymentStatus;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_id", nullable = false)  // Must match DB column name
+    @JoinColumn(name = "patient_id", nullable = false)
     private PatientEntity patient;
     public long getBillingId() {
         return billingId;

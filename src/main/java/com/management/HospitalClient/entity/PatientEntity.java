@@ -1,16 +1,18 @@
 package com.management.HospitalClient.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+
 import java.io.Serializable;
 
 
 @Data
 @Entity
 @Table(name = "patient_entity")
-public class PatientEntity  implements Serializable{
+public class PatientEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patient_seq_gen")
@@ -19,30 +21,32 @@ public class PatientEntity  implements Serializable{
             sequenceName = "patient_seq",
             allocationSize = 1
     )
-    @Column(name="patient_id")
+    @Column(name = "patient_id")
     private long patientId;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
-    @Column(name="phone_number")
+    @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name="gender")
+    @Column(name = "gender")
     private String gender;
-    @Column(name="address")
+    @Column(name = "address")
     private String address;
-    @Column(name="blood_group")
+    @Column(name = "blood_group")
     private String bloodGroup;
-    @Column(name="date_of_birth")
+    @Column(name = "date_of_birth")
     private String dateOfBirth;
-    @Column(name="emergency_contact")
+    @Column(name = "emergency_contact")
     private String emergencyContact;
-    @Column(name="medical_history_notes")
+    @Column(name = "medical_history_notes")
     private String medicalHistoryNotes;
     @NotBlank
     @Email
-    @Column(name="email_address")
+    @Column(name = "email_address")
     private String emailAddress;
     @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
+    @JsonBackReference
     private AppointmentEntity appointment;
+
     public long getPatientId() {
         return patientId;
     }
