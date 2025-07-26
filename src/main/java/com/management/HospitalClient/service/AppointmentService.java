@@ -4,7 +4,6 @@ import com.management.HospitalClient.entity.AppointmentEntity;
 import com.management.HospitalClient.entity.PatientEntity;
 import com.management.HospitalClient.repository.AppointmentRepository;
 import com.management.HospitalClient.repository.PatientRepository;
-import com.management.HospitalClient.utility.NotificationService;
 import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
