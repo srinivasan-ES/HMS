@@ -32,7 +32,7 @@ public class PharmacyController {
         return prescriptionService.getPrescription(id);
     }
 
-    @GetMapping("/get-prescription/{appointmentId}")
+    @GetMapping("/prescription/{appointmentId}")
     public PrescriptionEntity getPrescriptionId(@PathVariable long appointmentId) {
         return prescriptionService.getPrescriptionById(appointmentId);
     }
