@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 @Data
@@ -43,9 +44,9 @@ public class PatientEntity implements Serializable {
     @Email
     @Column(name = "email_address")
     private String emailAddress;
-    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     @JsonBackReference
-    private AppointmentEntity appointment;
+    private List<AppointmentEntity> appointment;
 
     public long getPatientId() {
         return patientId;
@@ -127,11 +128,11 @@ public class PatientEntity implements Serializable {
         this.emailAddress = emailAddress;
     }
 
-    public AppointmentEntity getAppointment() {
+    public List<AppointmentEntity> getAppointment() {
         return appointment;
     }
 
-    public void setAppointment(AppointmentEntity appointment) {
+    public void setAppointment(List<AppointmentEntity> appointment) {
         this.appointment = appointment;
     }
 }

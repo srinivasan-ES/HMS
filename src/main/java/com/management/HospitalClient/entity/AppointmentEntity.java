@@ -31,7 +31,7 @@ public class AppointmentEntity implements Serializable {
     private String status;
     @Column(name = "notes")
     private String notes;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "patient_Id")
     private PatientEntity patient;
 
