@@ -30,11 +30,6 @@ public class MedicineController {
         return medicationService.getMedicine(id);
     }
 
-    @GetMapping("/get-medicine/{prescriptionId}")
-    public MedicineEntity getMedicineId(@PathVariable long medicineId) {
-        return medicationService.getMedicineById(medicineId);
-    }
-
     @DeleteMapping("/cancel-medicine/{id}")
     public String deleteMedicine(@PathVariable Long id) {
         medicationService.deleteMedicine(id);

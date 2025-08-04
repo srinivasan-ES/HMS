@@ -23,9 +23,9 @@ public class MedicationService {
         return medicationRepository.findById(id).orElse(new MedicineEntity());
     }
 
-    public MedicineEntity getMedicineById(long id) {
-        return medicationRepository.findByprescriptionId(id);
-    }
+    //public MedicineEntity getMedicineById(long id) {
+    //    return medicationRepository.findById(id);
+    //}
 
     public void deleteMedicine(long id) {
         medicationRepository.deleteById(id);

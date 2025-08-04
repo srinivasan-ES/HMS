@@ -1,5 +1,6 @@
 package com.management.HospitalClient.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +36,7 @@ public class PrescriptionEntity implements Serializable{
     @Column(name="remarks")
     private String remarks;
     @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<MedicineEntity> medicineEntityList;
 
     public long getPrescriptionId() {

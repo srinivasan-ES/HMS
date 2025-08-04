@@ -25,8 +25,6 @@ public class MedicineEntity implements Serializable{
     )
     @Column(name="medication_id")
     private long medicationId;
-    @Column(name="prescription_id")
-    private Long prescriptionId;
     @Column(name="medicine_name")
     private String medicineName;
     @Column(name="dosage")
@@ -35,6 +33,9 @@ public class MedicineEntity implements Serializable{
     private int duration;
     @Column(name="frequency")
     private String frequency;
+    @ManyToOne
+    @JoinColumn(name = "prescription_id", referencedColumnName = "prescription_id")
+    private PrescriptionEntity prescription;
 
     public long getMedicationId() {
         return medicationId;
@@ -42,14 +43,6 @@ public class MedicineEntity implements Serializable{
 
     public void setMedicationId(long medicationId) {
         this.medicationId = medicationId;
-    }
-
-    public Long getPrescriptionId() {
-        return prescriptionId;
-    }
-
-    public void setPrescriptionId(Long prescriptionId) {
-        this.prescriptionId = prescriptionId;
     }
 
     public String getMedicineName() {
@@ -82,5 +75,13 @@ public class MedicineEntity implements Serializable{
 
     public void setFrequency(String frequency) {
         this.frequency = frequency;
+    }
+
+    public PrescriptionEntity getPrescriptionEntity() {
+        return prescription;
+    }
+
+    public void setPrescriptionEntity(PrescriptionEntity prescriptionEntity) {
+        this.prescription = prescriptionEntity;
     }
 }
