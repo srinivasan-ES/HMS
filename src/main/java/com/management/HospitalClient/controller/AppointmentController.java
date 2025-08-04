@@ -40,5 +40,10 @@ public class AppointmentController {
         appointmentService.deleteAppointment(id);
         return "Success";
     }
+    @GetMapping("/get-appointmentByDoctorId/{id}")
+    public AppointmentEntity getAppointmentByDoctorId(@PathVariable long id) {
+        return appointmentService.getAppointmentByDoctorId(id);
+    }
+
 
 }

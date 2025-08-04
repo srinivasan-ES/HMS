@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,6 +34,8 @@ public class PrescriptionEntity implements Serializable{
     private String diagnosis;
     @Column(name="remarks")
     private String remarks;
+    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
+    private List<MedicineEntity> medicineEntityList;
 
     public long getPrescriptionId() {
         return prescriptionId;
@@ -72,5 +75,13 @@ public class PrescriptionEntity implements Serializable{
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public List<MedicineEntity> getMedicineEntityList() {
+        return medicineEntityList;
+    }
+
+    public void setMedicineEntityList(List<MedicineEntity> medicineEntityList) {
+        this.medicineEntityList = medicineEntityList;
     }
 }

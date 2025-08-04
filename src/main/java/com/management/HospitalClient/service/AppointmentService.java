@@ -34,9 +34,9 @@ public class AppointmentService {
         return appointment;
     }
 
-    public AppointmentEntity getAppointment(long id) {
+    public AppointmentEntity getAppointmentByDoctorId(long id) {
 
-        return appointmentRepository.findById(id).orElse(new AppointmentEntity());
+        return appointmentRepository.findByDoctorId(id);
     }
 
     public void deleteAppointment(long id) {
@@ -49,4 +49,8 @@ public class AppointmentService {
         return appointmentRepository.findAll();
     }
 
+    public AppointmentEntity getAppointment(long id) {
+
+        return appointmentRepository.findById(id).orElse(new AppointmentEntity());
+    }
 }
