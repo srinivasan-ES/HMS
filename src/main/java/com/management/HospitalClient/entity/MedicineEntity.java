@@ -28,7 +28,7 @@ public class MedicineEntity implements Serializable{
     @Column(name="medicine_name")
     private String medicineName;
     @Column(name="dosage")
-    private String appointmentDate;
+    private String dosage;
     @Column(name="duration")
     private int duration;
     @Column(name="frequency")
@@ -53,12 +53,20 @@ public class MedicineEntity implements Serializable{
         this.medicineName = medicineName;
     }
 
-    public String getAppointmentDate() {
-        return appointmentDate;
+    public String getDosage() {
+        return dosage;
     }
 
-    public void setAppointmentDate(String appointmentDate) {
-        this.appointmentDate = appointmentDate;
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
+    }
+
+    public PrescriptionEntity getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(PrescriptionEntity prescription) {
+        this.prescription = prescription;
     }
 
     public int getDuration() {
