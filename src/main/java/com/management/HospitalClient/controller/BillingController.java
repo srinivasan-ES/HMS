@@ -22,9 +22,14 @@ public class BillingController {
     @Autowired
     BillingService billingService;
 
-    @PostMapping("/generate-bill/{patientId}")
-    public BillingEntity generateBill(@PathVariable Long patientId,@RequestBody BillingEntity billingEntity) {
-        return billingService.createBilling(patientId,billingEntity);
+    @PostMapping("/generate-bill/{appointmentId}")
+    public BillingEntity generateBill(@PathVariable Long appointmentId) {
+        return billingService.createBilling(appointmentId);
+    }
+
+    @GetMapping("/generate-bill/{appointmentId}")
+    public BillingEntity billPayment(@PathVariable Long appointmentId) {
+        return billingService.updateBilling(appointmentId);
     }
 
     @GetMapping("/get-billing/{id}")

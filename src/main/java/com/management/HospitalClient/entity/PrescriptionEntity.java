@@ -1,6 +1,9 @@
 package com.management.HospitalClient.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +19,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "prescription_Entity")
-public class PrescriptionEntity implements Serializable{
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "prescriptionId")
+public class PrescriptionEntity extends Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prescription_seq_gen")
@@ -25,19 +29,19 @@ public class PrescriptionEntity implements Serializable{
             sequenceName = "prescription_seq",   // this is the actual DB sequence name
             allocationSize = 1              // generates one ID at a time
     )
-    @Column(name="prescription_id")
+    @Column(name = "prescription_id")
     private long prescriptionId;
-    @Column(name="appointment_id")
+    @Column(name = "appointment_id")
     private Long appointmentId;
-    @Column(name="prescribed_date")
+    @Column(name = "prescribed_date")
     private String prescribedDate;
-    @Column(name="diagnosis")
+    @Column(name = "diagnosis")
     private String diagnosis;
-    @Column(name="remarks")
+    @Column(name = "remarks")
     private String remarks;
-    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<MedicineEntity> medicineEntityList;
+    @OneToMany(mappedBy = "prescription",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<MedicineEntity> medicines;
 
     public long getPrescriptionId() {
         return prescriptionId;
@@ -79,11 +83,11 @@ public class PrescriptionEntity implements Serializable{
         this.remarks = remarks;
     }
 
-    public List<MedicineEntity> getMedicineEntityList() {
-        return medicineEntityList;
+    public List<MedicineEntity> getMedicines() {
+        return medicines;
     }
 
-    public void setMedicineEntityList(List<MedicineEntity> medicineEntityList) {
-        this.medicineEntityList = medicineEntityList;
+    public void setMedicines(List<MedicineEntity> medicines) {
+        this.medicines = medicines;
     }
 }

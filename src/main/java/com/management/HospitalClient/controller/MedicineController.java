@@ -1,6 +1,9 @@
 package com.management.HospitalClient.controller;
 
+import com.management.HospitalClient.dto.AddMedicineMasterRequest;
 import com.management.HospitalClient.entity.MedicineEntity;
+import com.management.HospitalClient.entity.MedicineMasterEntity;
+import com.management.HospitalClient.entity.MedicineVariantEntity;
 import com.management.HospitalClient.entity.PrescriptionEntity;
 import com.management.HospitalClient.service.MedicationService;
 import com.management.HospitalClient.service.PrescriptionService;
@@ -9,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/v1")
@@ -21,13 +26,13 @@ public class MedicineController {
     MedicationService medicationService;
 
     @PostMapping("/add-medicine")
-    public MedicineEntity saveOrUpdate(@RequestBody MedicineEntity medicineEntity) {
-        return medicationService.createPrescription(medicineEntity);
+    public void saveOrUpdate(@RequestBody AddMedicineMasterRequest medicineEntity) {
+         medicationService.createPrescription(medicineEntity);
     }
 
-    @GetMapping("/get-medicine/{id}")
-    public MedicineEntity getMedicine(@PathVariable long id) {
-        return medicationService.getMedicine(id);
+    @GetMapping("/get-medicine")
+    public List<MedicineMasterEntity> getMedicine() {
+        return medicationService.getMedicine();
     }
 
     @DeleteMapping("/cancel-medicine/{id}")

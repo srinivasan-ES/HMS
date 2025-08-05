@@ -1,5 +1,8 @@
 package com.management.HospitalClient.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +17,8 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "Medication_Entity")
-public class MedicineEntity implements Serializable{
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "medicationId")
+public class MedicineEntity extends Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Medication_seq_gen")
@@ -23,18 +27,14 @@ public class MedicineEntity implements Serializable{
             sequenceName = "Medication_seq",   // this is the actual DB sequence name
             allocationSize = 1              // generates one ID at a time
     )
-    @Column(name="medication_id")
+    @Column(name = "medication_id")
     private long medicationId;
-    @Column(name="medicine_name")
-    private String medicineName;
-    @Column(name="dosage")
-    private String dosage;
-    @Column(name="duration")
-    private int duration;
-    @Column(name="frequency")
+    private Integer quantity;
     private String frequency;
     @ManyToOne
-    @JoinColumn(name = "prescription_id", referencedColumnName = "prescription_id")
+    private MedicineVariantEntity medicineVariantEntity;
+    @ManyToOne
+    @JsonBackReference
     private PrescriptionEntity prescription;
 
     public long getMedicationId() {
@@ -45,36 +45,28 @@ public class MedicineEntity implements Serializable{
         this.medicationId = medicationId;
     }
 
-    public String getMedicineName() {
-        return medicineName;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setMedicineName(String medicineName) {
-        this.medicineName = medicineName;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public String getDosage() {
-        return dosage;
+    public MedicineVariantEntity getMedicineVariantEntity() {
+        return medicineVariantEntity;
     }
 
-    public void setDosage(String dosage) {
-        this.dosage = dosage;
+    public void setMedicineVariantEntity(MedicineVariantEntity medicineVariantEntity) {
+        this.medicineVariantEntity = medicineVariantEntity;
     }
 
-    public PrescriptionEntity getPrescription() {
+    public PrescriptionEntity getPrescriptionEntity() {
         return prescription;
     }
 
-    public void setPrescription(PrescriptionEntity prescription) {
-        this.prescription = prescription;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setPrescriptionEntity(PrescriptionEntity prescriptionEntity) {
+        this.prescription = prescriptionEntity;
     }
 
     public String getFrequency() {
@@ -85,11 +77,11 @@ public class MedicineEntity implements Serializable{
         this.frequency = frequency;
     }
 
-    public PrescriptionEntity getPrescriptionEntity() {
+    public PrescriptionEntity getPrescription() {
         return prescription;
     }
 
-    public void setPrescriptionEntity(PrescriptionEntity prescriptionEntity) {
-        this.prescription = prescriptionEntity;
+    public void setPrescription(PrescriptionEntity prescription) {
+        this.prescription = prescription;
     }
 }

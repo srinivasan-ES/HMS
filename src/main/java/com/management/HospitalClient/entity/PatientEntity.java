@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "patient_entity")
-public class PatientEntity implements Serializable {
+public class PatientEntity extends Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patient_seq_gen")

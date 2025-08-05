@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "Billing_Entity")
-public class BillingEntity implements Serializable {
+public class BillingEntity extends Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "billing_seq_gen")
@@ -25,21 +25,19 @@ public class BillingEntity implements Serializable {
     )
     @Column(name = "billing_id")
     private long billingId;
-    @Column(name = "total_amount")
-    private double totalAmount;
-    @Column(name = "discount")
-    private int discount;
-    @Column(name = "paid_amount")
-    private Long paidAmount;
-    @Column(name = "payment_mode")
-    private String paymentMode;
+    @Column(name = "appointment_id")
+    private long appointmentId;
+    @Column(name = "doctor_fee")
+    private double doctorFee;
+    @Column(name = "medicine_cost")
+    private double medicineCost;
+    @Column(name = "total")
+    private double total;
     @Column(name = "billing_date")
     private String billingDate;
     @Column(name = "payment_status")
     private String paymentStatus;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_id", nullable = false)
-    private PatientEntity patient;
+
     public long getBillingId() {
         return billingId;
     }
@@ -48,36 +46,36 @@ public class BillingEntity implements Serializable {
         this.billingId = billingId;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public long getAppointmentId() {
+        return appointmentId;
     }
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setAppointmentId(long appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
-    public int getDiscount() {
-        return discount;
+    public double getDoctorFee() {
+        return doctorFee;
     }
 
-    public void setDiscount(int discount) {
-        this.discount = discount;
+    public void setDoctorFee(double doctorFee) {
+        this.doctorFee = doctorFee;
     }
 
-    public Long getPaidAmount() {
-        return paidAmount;
+    public double getMedicineCost() {
+        return medicineCost;
     }
 
-    public void setPaidAmount(Long paidAmount) {
-        this.paidAmount = paidAmount;
+    public void setMedicineCost(double medicineCost) {
+        this.medicineCost = medicineCost;
     }
 
-    public String getPaymentMode() {
-        return paymentMode;
+    public double getTotal() {
+        return total;
     }
 
-    public void setPaymentMode(String paymentMode) {
-        this.paymentMode = paymentMode;
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public String getBillingDate() {
@@ -94,13 +92,5 @@ public class BillingEntity implements Serializable {
 
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
-    }
-
-    public PatientEntity getPatient() {
-        return patient;
-    }
-
-    public void setPatient(PatientEntity patient) {
-        this.patient = patient;
     }
 }

@@ -1,6 +1,8 @@
 package com.management.HospitalClient.controller;
 
+import com.management.HospitalClient.dto.DoctorMasterDataDTO;
 import com.management.HospitalClient.entity.DoctorEntity;
+import com.management.HospitalClient.entity.DoctorMasterDataEntity;
 import com.management.HospitalClient.service.DoctorService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -44,5 +46,10 @@ public class DoctorController {
     @GetMapping("/get-doctor/phone-number/{phoneNumber}")
     public DoctorEntity getDoctorByPhoneNumber(@PathVariable String phoneNumber) {
         return doctorService.getDoctorByPhoneNumber(phoneNumber);
+    }
+
+    @PostMapping("/add-doctor-master-data")
+    public String saveMasterData(@RequestBody DoctorMasterDataDTO doctorMasterDataEntity) {
+        return doctorService.addMasterData(doctorMasterDataEntity);
     }
 }

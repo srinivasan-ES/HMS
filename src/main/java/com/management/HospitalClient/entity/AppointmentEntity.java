@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "Appointment_Entity")
-public class AppointmentEntity implements Serializable {
+public class AppointmentEntity extends Auditable implements Serializable  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appointment_seq_gen")
@@ -31,6 +31,10 @@ public class AppointmentEntity implements Serializable {
     private String status;
     @Column(name = "notes")
     private String notes;
+    @Column(name = "speciality")
+    private String speciality;
+    @Column(name = "consultation_type")
+    private String consultationType;
     @ManyToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "patient_Id")
     private PatientEntity patient;
@@ -89,5 +93,21 @@ public class AppointmentEntity implements Serializable {
 
     public void setPatient(PatientEntity patient) {
         this.patient = patient;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
+    public String getConsultationType() {
+        return consultationType;
+    }
+
+    public void setConsultationType(String consultationType) {
+        this.consultationType = consultationType;
     }
 }

@@ -1,5 +1,6 @@
 package com.management.HospitalClient.controller;
 
+import com.management.HospitalClient.dto.AddPrescriptionRequest;
 import com.management.HospitalClient.entity.AppointmentEntity;
 import com.management.HospitalClient.entity.PrescriptionEntity;
 import com.management.HospitalClient.service.AppointmentService;
@@ -23,7 +24,7 @@ public class PharmacyController {
     PrescriptionService prescriptionService;
 
     @PostMapping("/add-prescription")
-    public PrescriptionEntity saveOrUpdate(@RequestBody PrescriptionEntity prescriptionEntity) {
+    public PrescriptionEntity saveOrUpdate(@RequestBody AddPrescriptionRequest prescriptionEntity) {
         return prescriptionService.createPrescription(prescriptionEntity);
     }
 

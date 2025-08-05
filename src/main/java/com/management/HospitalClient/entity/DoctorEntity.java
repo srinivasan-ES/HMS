@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +15,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "doctor_entity")
-public class DoctorEntity implements Serializable {
+public class DoctorEntity extends Auditable implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dr_seq_gen")
@@ -39,6 +40,8 @@ public class DoctorEntity implements Serializable {
     private String department;
     @Column(name = "availability_status")
     private String availabilityStatus;
+    @OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL)
+    private List<DoctorMasterDataEntity> masterDataEntities;
 
     public long getDoctorId() {
         return doctorId;
@@ -102,5 +105,13 @@ public class DoctorEntity implements Serializable {
 
     public void setAvailabilityStatus(String availabilityStatus) {
         this.availabilityStatus = availabilityStatus;
+    }
+
+    public List<DoctorMasterDataEntity> getMasterDataEntities() {
+        return masterDataEntities;
+    }
+
+    public void setMasterDataEntities(List<DoctorMasterDataEntity> masterDataEntities) {
+        this.masterDataEntities = masterDataEntities;
     }
 }
